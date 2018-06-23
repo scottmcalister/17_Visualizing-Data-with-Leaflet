@@ -6,7 +6,7 @@ d3.json(EarthquakeURL, function(data){
 });
 
 function Features(earthquakeData){
-	var earthquakes = L.geojson(earthquakeData, {
+	var earthquakes = L.geoJson(earthquakeData, {
 		onEachFeature: function(feature,layer){
 			layer.bindPopup("<h2>Magnitude: " + feature.properties.mag + "</h2><h2>Location: " + feature.properties.place + "</h2><hr><p>" + new Date(feature.properties.time) + "</p>");
 		},
@@ -45,7 +45,7 @@ function createMap(earthquakes){
     var tectonicplates = new L.layerGroup();
     var overlayMaps = {
     	"Earthquakes": earthquakes,
-    	"Tectonic Plates: tectonicplates"
+    	"Tectonic Plates": tectonicplates
     };
     var myMap = L.map("map", {
     	center:[37.09, -95.71], 
@@ -54,7 +54,7 @@ function createMap(earthquakes){
     });
 
     d3.json(tectonicPlatesURL, function(plateData){
-    	L.geoJson(plateData{
+    	L.geoJson(plateData, {
     		color: "yellow",
     		weight: 2
     	})
